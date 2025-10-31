@@ -1,6 +1,5 @@
 # Wajeb Backend
 
-A robust Node.js backend service for file management and user authentication.
 
 ## Project Overview
 
