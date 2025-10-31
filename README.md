@@ -57,6 +57,3 @@ npm start
 - Secure file upload validation
 - Environment variable configuration
 - Request validation and sanitization
-
-## Conta
-Project Link: https://github.com/idrisregg/Wajeb-Backend
