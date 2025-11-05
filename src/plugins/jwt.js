@@ -5,10 +5,10 @@ export default fp(async function (fastify, opts) {
     fastify.register(fastifyJwt, {
         secret: process.env.JWT_SECRET,
         sign: {
-            expiresIn: '24h'
+            expiresIn: '3h'
         },
         verify: {
-            maxAge: '24h'
+            maxAge: '3h'
         }
     });
 
