@@ -51,9 +51,5 @@ npm start
 - **Error Handling**: Comprehensive error handling and logging
 - **Middleware Support**: Authentication and request validation middleware
 
-## Security
 
-- JWT-based authentication
-- Secure file upload validation
-- Environment variable configuration
 - Request validation and sanitization
