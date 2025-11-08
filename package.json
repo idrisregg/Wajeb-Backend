@@ -26,13 +26,16 @@
     "build": "npm run compile",
     "compile": "echo \"no-op for JS\"",
     "start": "node --enable-source-maps src/server.js",
-    "start:prod": "NODE_ENV=production node --enable-source-maps src/server.js"
+    "start:prod": "NODE_ENV=production node --enable-source-maps src/server.js",
+    "test": "vitest --run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vitest": "^4.0.8"
   }
 }
