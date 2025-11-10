@@ -18,6 +18,7 @@ fastify.register(cors, {
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 });
 
 let cleanupService = null;
