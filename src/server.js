@@ -15,10 +15,9 @@ const fastify = Fastify({
 });
 
 fastify.register(cors, {
-    origin: '*',
+    origin: [process.env.FRONTEND_URL||'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization']
 });
 
 let cleanupService = null;
