@@ -10,7 +10,7 @@ class S3Service {
   constructor() {
     console.log('Initializing S3 Client');
     
-    const hasCredentials = process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY;
+    const hasCredentials = process.env.MY_AWS_ACCESS_KEY_ID && process.env.MY_AWS_SECRET_ACCESS_KEY;
     console.log('AWS Credentials:', hasCredentials ? 'Provided' : 'Missing');
 
     if (!hasCredentials) {
@@ -18,13 +18,13 @@ class S3Service {
     }
 
     const s3Config = {
-      region: process.env.AWS_REGION || 'us-east-1',
+      region: process.env.MY_AWS_REGION || 'us-east-1',
     };
 
-    if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+    if (process.env. && process.env.MY_AWS_SECRET_ACCESS_KEY) {
       s3Config.credentials = {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID.trim(),
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY.trim(),
+        accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID.trim(),
+        secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY.trim(),
       };
     }
 
@@ -55,7 +55,7 @@ class S3Service {
       console.error('S3 Upload Error Details:', {
         message: error.message,
         code: error.Code,
-        region: process.env.AWS_REGION,
+        region: process.env.MY_AWS_REGION,
         bucket: this.bucketName
       });
       throw new Error(`S3 upload failed: ${error.message}`);
