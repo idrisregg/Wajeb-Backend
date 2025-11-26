@@ -21,7 +21,7 @@ class S3Service {
       region: process.env.MY_AWS_REGION || 'us-east-1',
     };
 
-    if (process.env. && process.env.MY_AWS_SECRET_ACCESS_KEY) {
+    if (process.env.MY_AWS_ACCESS_KEY_ID && process.env.MY_AWS_SECRET_ACCESS_KEY) {
       s3Config.credentials = {
         accessKeyId: process.env.MY_AWS_ACCESS_KEY_ID.trim(),
         secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY.trim(),
