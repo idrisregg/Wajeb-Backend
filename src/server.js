@@ -15,7 +15,7 @@ const fastify = Fastify({
 });
 
 fastify.register(cors, {
-    origin: [process.env.FRONTEND_URL||'http://localhost:5173'],
+    origin: [process.env.FRONTEND_URL??'http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
 });
@@ -68,7 +68,7 @@ const start = async () => {
             }
         });
 
-        const port = process.env.PORT || 3000;
+        const port = process.env.PORT ?? 3000;
         const host = '0.0.0.0';
         await fastify.listen({ port, host });
         fastify.log.info(`Server running on ${fastify.server.address().port}`);
