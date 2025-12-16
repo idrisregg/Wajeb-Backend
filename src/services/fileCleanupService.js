@@ -14,12 +14,10 @@ class FileCleanupService {
             this.cleanupExpiredFiles();
         }, this.cleanupInterval);
 
-        console.log('File cleanup service started');
     }
 
     async cleanupExpiredFiles() {
         try {
-            console.log('Starting file cleanup process');
             const startTime = Date.now();
             
             const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -31,7 +29,6 @@ class FileCleanupService {
                 ]
             });
 
-            console.log(`Found ${expiredFiles.length} expired files to clean up`);
 
             let successCount = 0;
             let failCount = 0;
@@ -39,10 +36,8 @@ class FileCleanupService {
             for (const file of expiredFiles) {
                 try {
                     await s3Service.deleteFile(file.filePath);
-                    console.log(`Deleted from S3: ${file.fileName}`);
 
                     await File.findByIdAndDelete(file._id);
-                    console.log(`Deleted from DB: ${file.fileName}`);
                     
                     successCount++;
                 } catch (error) {
@@ -52,8 +47,6 @@ class FileCleanupService {
             }
 
             const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-            console.log(`File cleanup completed in ${duration}s`);
-            console.log(`Summary: ${successCount} successful, ${failCount} failed`);
             
         } catch (error) {
             console.error('Critical error during file cleanup:', error);
@@ -61,7 +54,6 @@ class FileCleanupService {
     }
 
     async forceCleanup() {
-        console.log('Force cleanup initiated');
         await this.cleanupExpiredFiles();
     }
 
