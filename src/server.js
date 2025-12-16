@@ -27,7 +27,6 @@ const start = async () => {
         await mongoose.connect(process.env.MONGO_DB, {
             dbName: 'Wajeb'
         });
-        console.log('Connected to DB');
 
         await fastify.register(fastifyMultipart, {
             limits: {
@@ -74,7 +73,6 @@ const start = async () => {
         fastify.log.info(`Server running on ${fastify.server.address().port}`);
         
         cleanupService = new FileCleanupService();
-        console.log('File cleanup service initialized');
         
     } catch (error) {
         fastify.log.error(error);
@@ -83,10 +81,8 @@ const start = async () => {
 };
 
 process.on('SIGINT', async () => {
-    console.log('\nGracefully shutting down...');
     await fastify.close();
     await mongoose.connection.close();
-    console.log('Server and database connections closed');
     process.exit(0);
 });
 
