@@ -8,10 +8,8 @@ import {
 
 class S3Service {
   constructor() {
-    console.log('Initializing S3 Client');
     
     const hasCredentials = process.env.MY_AWS_ACCESS_KEY_ID && process.env.MY_AWS_SECRET_ACCESS_KEY;
-    console.log('AWS Credentials:', hasCredentials ? 'Provided' : 'Missing');
 
     if (!hasCredentials) {
       throw new Error('AWS credentials are required in environment variables');
@@ -34,12 +32,10 @@ class S3Service {
     this.s3Client = new S3Client(s3Config);
     this.bucketName = process.env.AWS_S3_BUCKET;
     
-    console.log('S3 Client initialized successfully');
   }
 
   async uploadFile(fileBuffer, fileName, mimeType) {
     try {
-      console.log(`Uploading to S3: ${fileName} (${fileBuffer.length} bytes)`);
       
       const command = new PutObjectCommand({
         Bucket: this.bucketName,
@@ -49,7 +45,6 @@ class S3Service {
       });
 
       await this.s3Client.send(command);
-      console.log(`S3 Upload Success: ${fileName}`);
       return fileName;
     } catch (error) {
       console.error('S3 Upload Error Details:', {
