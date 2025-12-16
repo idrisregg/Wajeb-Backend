@@ -7,7 +7,6 @@ async function uploadFile(req, reply) {
     let uploadedFileKey = null;
     
     try {
-        console.log('Upload started for user:', req.user.userId);
         
         const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
         const recentUpload = await File.findOne({
@@ -30,7 +29,6 @@ async function uploadFile(req, reply) {
 
         for await (const part of parts) {
             if (part.file) {
-                console.log('Processing file:', part.filename);
                 
                 const allowedMimeTypes = [
                     'image/jpeg',
@@ -328,7 +326,6 @@ async function updateFile(req, reply) {
 async function deleteFile(req, reply) {
     try {
         const fileId = req.params.id;
-        console.log('DELETE request for file ID:', fileId);
 
         if (!fileId || fileId.length !== 24) {
             return reply.status(400).send({ 
@@ -362,13 +359,11 @@ async function deleteFile(req, reply) {
         
         try {
             await s3Service.deleteFile(file.filePath);
-            console.log(`Deleted file from S3: ${file.filePath}`);
         } catch (s3Error) {
             console.error('Error deleting file from S3:', s3Error);
         }
         
         await File.findByIdAndDelete(fileId);
-        console.log(`File ${fileId} deleted successfully`);
         
         reply.send({ 
             message: "File deleted successfully",
