@@ -8,14 +8,25 @@ async function getAllUsers(req, reply) {
         reply.status(500).send(error);
     }
 }
-
 async function getUserById(req, reply) {
-    try {
-        const user = await User.findById(req.params.id);
-        reply.send(user);
-    } catch (error) {
-        reply.status(500).send(error);
+  try {
+    const { id } = req.params;
+
+    // validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return reply.status(400).send({ message: "Invalid user ID" });
     }
+
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return reply.status(404).send({ message: "User not found" });
+    }
+
+    reply.send(user);
+  } catch (error) {
+    reply.status(500).send({ message: "Server error" });
+  }
 }
 
 async function createUser(req, reply) {
