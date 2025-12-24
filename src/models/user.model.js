@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     minLength: 5,
+    lowercase: true
   },
   userName: {
     type: String,
@@ -20,6 +21,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
     minLength: 6,
+    select: false
   },
 });
 
