@@ -20,6 +20,11 @@ fastify.register(cors, {
     credentials: true,
 });
 
+await fastify.register(import('@fastify/rate-limit'), {
+  max: 100,
+  timeWindow: '1 minute'
+})
+
 let cleanupService = null;
 
 const start = async () => {
